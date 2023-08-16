@@ -1,12 +1,17 @@
+// ContactForm.jsx
+import React from 'react';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import { useDispatch } from 'react-redux';
+import { addContact } from '../../redux/operations';
+
 import {
   FormContact,
   Label,
   Input,
   Button,
   ErrorText,
-} from './ContactForm.styled.js';
+} from './ContactForm.styled';
 
 const nameValidate =
   "^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$";
@@ -30,7 +35,17 @@ const initialValues = {
   phone: '',
 };
 
-export const ContactForm = ({ handleSubmit }) => {
+export const ContactForm = () => {
+  const dispatch = useDispatch();
+
+  const handleSubmit = values => {
+    const newContact = {
+      name: values.name,
+      phone: values.phone,
+    };
+    dispatch(addContact(newContact));
+  };
+
   return (
     <Formik
       initialValues={initialValues}

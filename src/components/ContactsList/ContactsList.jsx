@@ -1,10 +1,16 @@
-import { List, Item, Button } from './ContactsList.styled';
-import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
-import { deleteContact } from 'redux/operations';
+// ContactsList.jsx
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectFilteredContacts, selectContacts } from '../../redux/selectors';
+import { deleteContact } from '../../redux/operations';
 
-export const ContactsList = ({ contacts }) => {
+import { List, Item, Button } from './ContactsList.styled';
+
+export const ContactsList = () => {
+  const contacts = useSelector(selectFilteredContacts);
+  const allContacts = useSelector(selectContacts);
   const dispatch = useDispatch();
+
   return (
     <List>
       {contacts.map(({ id, name, phone }) => {
@@ -19,14 +25,4 @@ export const ContactsList = ({ contacts }) => {
       })}
     </List>
   );
-};
-
-List.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.exact({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      phone: PropTypes.number.isRequired,
-    })
-  ),
 };
