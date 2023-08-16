@@ -3,9 +3,9 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchContacts } from '../redux/operations';
 
-import { ContactForm } from './ContactForm/ContactForm';
-import { Filter } from './Filter/Filter';
-import { ContactsList } from './ContactsList/ContactsList';
+import { ContactForm } from '../components/ContactForm/ContactForm';
+import { Filter } from '../components/Filter/Filter';
+import ContactsList from '../components/ContactsList/ContactsList';
 import { Wrap } from './App.styled';
 
 export default function App() {
